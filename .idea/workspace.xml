@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cd62190-696b-4099-8754-650ab861065e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/NotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/password.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/base.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/new.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/html/password.html" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -731,7 +723,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32968536" />
