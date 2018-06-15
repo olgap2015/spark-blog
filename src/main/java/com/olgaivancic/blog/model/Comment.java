@@ -1,16 +1,20 @@
 package com.olgaivancic.blog.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Comment {
     private String commentAuthor;
     private String commentBody;
+    private Date dateCreated;
     // TODO:oi - add a Date field for the Comment class as well
     // TODO:oi - add toString() method after creating Date field
 
     public Comment(String commentAuthor, String commentBody) {
         this.commentAuthor = commentAuthor;
         this.commentBody = commentBody;
+        dateCreated = new Date();
     }
 
     public String getCommentAuthor() {
@@ -19,6 +23,12 @@ public class Comment {
 
     public String getCommentBody() {
         return commentBody;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy 'at' k:mm");
+        String formattedDate = dateFormat.format(dateCreated);
+        return formattedDate;
     }
 
     @Override

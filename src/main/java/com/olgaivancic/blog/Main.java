@@ -23,5 +23,12 @@ public class Main {
             model.put("blogEntries", dao.findAllEntries());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
+
+        // displays a blog post page
+        get("/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
+            return new ModelAndView(model, "detail.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }

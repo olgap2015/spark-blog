@@ -16,7 +16,6 @@ public class BlogEntry {
     private Date dateCreated;
     private String slug;
     private List<Comment> comments;
-    // TODO:oi - add toString() method after creating Date field
 
     public BlogEntry(String title, String blogBody) {
         this.postTitle = title;
@@ -29,6 +28,21 @@ public class BlogEntry {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public BlogEntry(String title, String blogBody, String commentAuthor, String commentText) {
+        this.postTitle = title;
+        this.postBody = blogBody;
+        dateCreated = new Date();
+        comments = new ArrayList<>();
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        comments.add(new Comment(commentAuthor, commentText));
     }
 
     public String getPostTitle() {
@@ -57,7 +71,7 @@ public class BlogEntry {
     }
 
     public String getFormattedDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy 'at' h:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy 'at' k:mm");
         String formattedDate = dateFormat.format(dateCreated);
         return formattedDate;
     }
