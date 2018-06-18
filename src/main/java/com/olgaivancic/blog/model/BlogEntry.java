@@ -83,7 +83,6 @@ public class BlogEntry {
     }
 
     public boolean addComment(Comment comment) {
-        // Store these comments!
         return comments.add(comment);
     }
 

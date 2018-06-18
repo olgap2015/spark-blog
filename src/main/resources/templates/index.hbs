@@ -2,7 +2,7 @@
             <div class="entry-list">
                 {{#each blogEntries}}
                     <article>
-                        <h2><a href="/{{ slug }}">{{ PostTitle }}</a></h2>
+                        <h2><a href="/blogposts/{{ slug }}">{{ PostTitle }}</a></h2>
                         <!-- TODO:oi - figure out how to mention the date in datetime attribute -->
                         <time datetime="2016-01-31 1:00">{{ formattedDate }}</time>
                     </article>
