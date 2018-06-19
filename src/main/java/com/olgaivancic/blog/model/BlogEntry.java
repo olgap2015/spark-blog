@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class BlogEntry {
+public class BlogEntry implements Comparable<BlogEntry> {
 
     private String postTitle;
     private String postBody;
@@ -43,6 +43,18 @@ public class BlogEntry {
         }
 
         comments.add(new Comment(commentAuthor, commentText));
+    }
+
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    public void setPostBody(String postBody) {
+        this.postBody = postBody;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public String getPostTitle() {
@@ -88,5 +100,10 @@ public class BlogEntry {
 
     public String getSlug() {
         return slug;
+    }
+
+    @Override
+    public int compareTo(BlogEntry o) {
+        return this.getDateCreated().compareTo(o.getDateCreated());
     }
 }

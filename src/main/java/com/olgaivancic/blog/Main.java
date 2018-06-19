@@ -7,8 +7,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
@@ -30,9 +29,6 @@ public class Main {
             if (req.cookie("previousPage") != null) {
                 req.attribute("previousPage", req.cookie("previousPage"));
             }
-//            if (req.cookie("pageSlug") != null) {
-//                req.attribute("pageSlug", req.cookie("pageSlug"));
-//            }
         });
 
         // before giving access to edit page, make sure that the user is admin
@@ -60,7 +56,10 @@ public class Main {
         // displays the Home (index) page with all the blog entries and an edit button
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("blogEntries", dao.findAllEntries());
+            List<BlogEntry> blogEntries = dao.findAllEntries();
+            Collections.sort(blogEntries);
+            Collections.reverse(blogEntries);
+            model.put("blogEntries", blogEntries);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -69,8 +68,6 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
             model.put("flashMessage", captureFlashMessage(req));
-//            String slug = dao.findEntryBySlug("slug").getSlug();
-//            res.cookie("pageSlug", slug);
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -114,17 +111,21 @@ public class Main {
                 halt();
             }
             if (req.attribute("previousPage").equals("edit")) {
-                res.redirect("/edit");
+                res.redirect("/edit/" + dao.findEntryBySlug(req.params("slug")).getSlug());
             } else if (req.attribute("previousPage").equals("new")) {
                 res.redirect("/new");
             }
-            // TODO:oi - ERROR happends because of the redirect. Fix it
             return null;
         });
 
         post("publish-new-entry", (req, res) -> {
             String title = req.queryParams("title");
             String entry = req.queryParams("entry");
+            if(title.isEmpty() || entry.isEmpty()) {
+                setFlashMessage(req, "Both TITLE and ENTRY are required fields!");
+                res.redirect("/new");
+                halt();
+            }
             BlogEntry blogEntry = new BlogEntry(title, entry);
             dao.addEntry(blogEntry);
             res.redirect("/");
@@ -142,6 +143,22 @@ public class Main {
             }
             Comment comment = new Comment(author, commentText);
             blogEntry.addComment(comment);
+            res.redirect("/blogposts/" + blogEntry.getSlug());
+            return null;
+        });
+
+        post("/edit/:slug", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            String title = req.queryParams("title");
+            String entry = req.queryParams("entry");
+            if(title.isEmpty() || entry.isEmpty()) {
+                setFlashMessage(req, "Both TITLE and ENTRY are required fields!");
+                res.redirect("/blogposts/" + blogEntry.getSlug());
+                halt();
+            }
+            blogEntry.setPostBody(entry);
+            blogEntry.setPostTitle(title);
+            blogEntry.setDateCreated(new Date());
             res.redirect("/blogposts/" + blogEntry.getSlug());
             return null;
         });

@@ -4,13 +4,13 @@
     {{/if}}
     <div class="edit-entry">
         <h2>Edit Entry</h2>
-        <form action="/edit" method="post">
+        <form action="/edit/{{ blogEntry.slug }}" method="post">
             <label for="title">Title</label>
             <input type="text" name="title" value="{{ blogEntry.postTitle }}"><br>
             <label for="entry">Entry</label>
             <textarea rows="5" name="entry">{{ blogEntry.postBody }}</textarea>
             <input type="submit" value="Save Entry" class="button">
-            <a href="#" class="button button-secondary">Cancel</a>
+            <a href="/blogposts/{{ blogEntry.slug }}" class="button button-secondary">Cancel</a>
         </form>
     </div>
 {{/partial}}
