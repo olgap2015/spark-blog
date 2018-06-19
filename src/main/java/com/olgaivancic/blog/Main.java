@@ -26,28 +26,36 @@ public class Main {
             if (req.cookie("password") != null) {
                 req.attribute("password", req.cookie("password"));
             }
-            if (req.cookie("previousPage") != null) {
-                req.attribute("previousPage", req.cookie("previousPage"));
-            }
+//            if (req.cookie("previousPage") != null) {
+//                req.attribute("previousPage", req.cookie("previousPage"));
+//            }
+//            if (req.cookie("slug") != null) {
+//                req.attribute("slug", req.cookie("slug"));
+//            }
         });
 
         // before giving access to edit page, make sure that the user is admin
         // TODO:oi - fix the path here, add the slug
-        before("/edit/:slug", (req, res) -> {
+        before("/edit/*", (req, res) -> {
+//            String slug = req.params("slug");
+//
+//            res.cookie("slug", slug);
+//            res.cookie("previousPage", "edit");
+
             if (req.attribute("password") == null ||
                     (!req.attribute("password").equals(PASSWORD))) {
                 setFlashMessage(req, "Please, sign in first");
-                res.cookie("previousPage", "edit");
                 res.redirect("/password");
                 halt();
             }
         });
 
         before("/new", (req, res) -> {
+//            res.cookie("previousPage", "new");
+
             if (req.attribute("password") == null ||
                     (!req.attribute("password").equals(PASSWORD))) {
                 setFlashMessage(req, "Please, sign in first");
-                res.cookie("previousPage", "new");
                 res.redirect("/password");
                 halt();
             }
@@ -60,6 +68,7 @@ public class Main {
             Collections.sort(blogEntries);
             Collections.reverse(blogEntries);
             model.put("blogEntries", blogEntries);
+            model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -74,7 +83,7 @@ public class Main {
         // displays a page to add a new blog post
         get("/new", (req, res) -> {
             Map<String, String> model = new HashMap<>();
-            model.put("password", req.attribute("password"));
+//            model.put("password", req.attribute("password"));
             model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "new.hbs");
         }, new HandlebarsTemplateEngine());
@@ -85,7 +94,7 @@ public class Main {
 
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", blogEntry);
-            model.put("password", req.attribute("password"));
+//            model.put("password", req.attribute("password"));
             model.put("flashMessage", captureFlashMessage(req));
 
             return new ModelAndView(model, "edit.hbs");
@@ -103,18 +112,22 @@ public class Main {
             Map<String, String> model = new HashMap<>();
             String password = req.queryParams("password");
             res.cookie("password", password);
-            model.put("password", password);
+//            model.put("password", password);
             model.put("flashMessage", captureFlashMessage(req));
             if (!password.toLowerCase().equals(PASSWORD)) {
                 setFlashMessage(req, "Wrong password! Please try again!");
                 res.redirect("/password");
                 halt();
             }
-            if (req.attribute("previousPage").equals("edit")) {
-                res.redirect("/edit/" + dao.findEntryBySlug(req.params("slug")).getSlug());
-            } else if (req.attribute("previousPage").equals("new")) {
-                res.redirect("/new");
-            }
+//            String slug = req.cookie("slug");
+//            String location = "/edit/" + slug;
+//            if (req.attribute("previousPage").equals("edit")) {
+//                res.redirect(location);
+//            } else if (req.attribute("previousPage").equals("new")) {
+//                res.redirect("/new");
+//            }
+            setFlashMessage(req, "You are now signed in! Welcome!");
+            res.redirect("/");
             return null;
         });
 

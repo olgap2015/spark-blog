@@ -16,6 +16,7 @@ public class BlogEntry implements Comparable<BlogEntry> {
     private Date dateCreated;
     private String slug;
     private List<Comment> comments;
+    private List<String> tags;
 
     public BlogEntry(String title, String blogBody) {
         this.postTitle = title;
@@ -44,6 +45,12 @@ public class BlogEntry implements Comparable<BlogEntry> {
 
         comments.add(new Comment(commentAuthor, commentText));
     }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    
 
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
@@ -84,6 +91,12 @@ public class BlogEntry implements Comparable<BlogEntry> {
 
     public String getFormattedDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy 'at' k:mm");
+        String formattedDate = dateFormat.format(dateCreated);
+        return formattedDate;
+    }
+
+    public String getHtmlDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d k:mm");
         String formattedDate = dateFormat.format(dateCreated);
         return formattedDate;
     }
