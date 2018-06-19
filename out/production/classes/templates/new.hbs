@@ -4,8 +4,8 @@
             <p id="flash-message">{{ flashMessage }}</p>
         {{/if}}
         <h2>Publish New Entry</h2>
-        <form>
-            <label for="title"> Title</label>
+        <form action="/publish-new-entry" method="post"">
+            <label for="title">Title</label>
             <input type="text" name="title"><br>
             <label for="entry">Entry</label>
             <textarea rows="5" name="entry"></textarea>

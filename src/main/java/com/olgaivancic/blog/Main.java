@@ -1,6 +1,8 @@
 package com.olgaivancic.blog;
 
 import com.olgaivancic.blog.dao.SimpleBlogDao;
+import com.olgaivancic.blog.model.BlogEntry;
+import com.olgaivancic.blog.model.Comment;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -22,17 +24,22 @@ public class Main {
         SimpleBlogDao dao = new SimpleBlogDao();
 
         before((req, res) -> {
-            if(req.cookie("password") != null) {
+            if (req.cookie("password") != null) {
                 req.attribute("password", req.cookie("password"));
             }
-            if(req.cookie("previousPage") != null) {
+            if (req.cookie("previousPage") != null) {
                 req.attribute("previousPage", req.cookie("previousPage"));
             }
+//            if (req.cookie("pageSlug") != null) {
+//                req.attribute("pageSlug", req.cookie("pageSlug"));
+//            }
         });
 
         // before giving access to edit page, make sure that the user is admin
-        before("/edit", (req, res) -> {
-            if(req.attribute("password") == null) {
+        // TODO:oi - fix the path here, add the slug
+        before("/edit/:slug", (req, res) -> {
+            if (req.attribute("password") == null ||
+                    (!req.attribute("password").equals(PASSWORD))) {
                 setFlashMessage(req, "Please, sign in first");
                 res.cookie("previousPage", "edit");
                 res.redirect("/password");
@@ -41,7 +48,8 @@ public class Main {
         });
 
         before("/new", (req, res) -> {
-            if(req.attribute("password") == null) {
+            if (req.attribute("password") == null ||
+                    (!req.attribute("password").equals(PASSWORD))) {
                 setFlashMessage(req, "Please, sign in first");
                 res.cookie("previousPage", "new");
                 res.redirect("/password");
@@ -60,6 +68,9 @@ public class Main {
         get("/blogposts/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
+            model.put("flashMessage", captureFlashMessage(req));
+//            String slug = dao.findEntryBySlug("slug").getSlug();
+//            res.cookie("pageSlug", slug);
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -72,11 +83,14 @@ public class Main {
         }, new HandlebarsTemplateEngine());
 
         // displays a page to edit an existing blog entry
-        // TODO:oi - make it possible to see the text of the post and title in the edit fields
-        get("/edit", (req, res) -> {
-            Map<String, String> model = new HashMap<>();
+        get("/edit/:slug", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("blogEntry", blogEntry);
             model.put("password", req.attribute("password"));
             model.put("flashMessage", captureFlashMessage(req));
+
             return new ModelAndView(model, "edit.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -94,9 +108,10 @@ public class Main {
             res.cookie("password", password);
             model.put("password", password);
             model.put("flashMessage", captureFlashMessage(req));
-            if(!password.toLowerCase().equals(PASSWORD)) {
+            if (!password.toLowerCase().equals(PASSWORD)) {
                 setFlashMessage(req, "Wrong password! Please try again!");
                 res.redirect("/password");
+                halt();
             }
             if (req.attribute("previousPage").equals("edit")) {
                 res.redirect("/edit");
@@ -104,6 +119,30 @@ public class Main {
                 res.redirect("/new");
             }
             // TODO:oi - ERROR happends because of the redirect. Fix it
+            return null;
+        });
+
+        post("publish-new-entry", (req, res) -> {
+            String title = req.queryParams("title");
+            String entry = req.queryParams("entry");
+            BlogEntry blogEntry = new BlogEntry(title, entry);
+            dao.addEntry(blogEntry);
+            res.redirect("/");
+            return null;
+        });
+
+        post("/blogposts/:slug/publish-comment", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            String author = req.queryParams("name");
+            String commentText = req.queryParams("comment");
+            if(commentText.isEmpty() || author.isEmpty()) {
+                setFlashMessage(req, "Both NAME and COMMENT are required fields!");
+                res.redirect("/blogposts/" + blogEntry.getSlug());
+                halt();
+            }
+            Comment comment = new Comment(author, commentText);
+            blogEntry.addComment(comment);
+            res.redirect("/blogposts/" + blogEntry.getSlug());
             return null;
         });
 
