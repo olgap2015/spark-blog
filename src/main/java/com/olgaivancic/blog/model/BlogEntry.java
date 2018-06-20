@@ -1,13 +1,11 @@
 package com.olgaivancic.blog.model;
 
 import com.github.slugify.Slugify;
+import com.olgaivancic.blog.dao.NotFoundException;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class BlogEntry implements Comparable<BlogEntry> {
 
@@ -16,11 +14,12 @@ public class BlogEntry implements Comparable<BlogEntry> {
     private Date dateCreated;
     private String slug;
     private List<Comment> comments;
-    private List<String> tags;
+    private List<Tag> tags;
 
     public BlogEntry(String title, String blogBody) {
         this.postTitle = title;
         this.postBody = blogBody;
+        tags = new ArrayList<>();
         dateCreated = new Date();
         comments = new ArrayList<>();
         try {
@@ -31,26 +30,85 @@ public class BlogEntry implements Comparable<BlogEntry> {
         }
     }
 
-    public BlogEntry(String title, String blogBody, String commentAuthor, String commentText) {
+    public BlogEntry(String title, String blogBody, String stringOfTags) {
         this.postTitle = title;
         this.postBody = blogBody;
         dateCreated = new Date();
         comments = new ArrayList<>();
+        tags = new ArrayList<>();
         try {
             Slugify slugify = new Slugify();
             slug = slugify.slugify(title);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createListOfTags(stringOfTags);
+    }
 
+    public BlogEntry(String title, String blogBody,
+                     String commentAuthor, String commentText, String stringOfTags) {
+        this.postTitle = title;
+        this.postBody = blogBody;
+        this.tags = new ArrayList<>();
+        createListOfTags(stringOfTags);
+        dateCreated = new Date();
+        comments = new ArrayList<>();
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         comments.add(new Comment(commentAuthor, commentText));
     }
 
-    public List<String> getTags() {
+    private void createListOfTags(String stringOfTags) {
+        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
+        stringTags.forEach(string -> {
+            Tag tag = new Tag(string);
+            tags.add(tag);
+        });
+    }
+
+    private List<Tag> createAndReturnListOfTags(String stringOfTags) {
+        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
+        stringTags.forEach(string -> {
+            Tag tag = new Tag(string);
+            tags.add(tag);
+        });
         return tags;
     }
 
-    
+    public BlogEntry(String title, String blogBody,
+                     String commentAuthor, String commentText) {
+        this.postTitle = title;
+        this.postBody = blogBody;
+        dateCreated = new Date();
+        comments = new ArrayList<>();
+        tags = new ArrayList<>();
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        comments.add(new Comment(commentAuthor, commentText));
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public Tag findTagBySlug(String slug) {
+        return tags.stream()
+                .filter(blogEntry -> blogEntry.getSlug().equals(slug))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
+    }
+
+    public boolean addTag (Tag tag) {
+        return tags.add(tag);
+    }
 
     public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
@@ -118,5 +176,9 @@ public class BlogEntry implements Comparable<BlogEntry> {
     @Override
     public int compareTo(BlogEntry o) {
         return this.getDateCreated().compareTo(o.getDateCreated());
+    }
+    // TODO:oi - something is not right with this set method. COmpare it to the createListOfTags method
+    public void setTags(String stringOfTags) {
+        tags = createAndReturnListOfTags(stringOfTags);
     }
 }

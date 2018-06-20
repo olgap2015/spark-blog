@@ -11,6 +11,13 @@
                         <p><a class="link" href="/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
                     </div>
                 </article>
+                <h2>Tags</h2>
+                    <p>
+                        {{#each blogEntry.tags }}
+                            <a href="/category/{{ tagText }}"</a>&nbsp;
+                        {{/each}}
+                    </p>
+
             </div>
         </div>
     </section>

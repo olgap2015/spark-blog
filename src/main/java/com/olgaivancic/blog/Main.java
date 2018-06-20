@@ -3,6 +3,7 @@ package com.olgaivancic.blog;
 import com.olgaivancic.blog.dao.SimpleBlogDao;
 import com.olgaivancic.blog.model.BlogEntry;
 import com.olgaivancic.blog.model.Comment;
+import com.olgaivancic.blog.model.Tag;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -139,7 +140,8 @@ public class Main {
                 res.redirect("/new");
                 halt();
             }
-            BlogEntry blogEntry = new BlogEntry(title, entry);
+            String stringOfTags = req.queryParams("tags");
+            BlogEntry blogEntry = new BlogEntry(title, entry, stringOfTags);
             dao.addEntry(blogEntry);
             res.redirect("/");
             return null;
@@ -164,6 +166,7 @@ public class Main {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String title = req.queryParams("title");
             String entry = req.queryParams("entry");
+            String stringOfTags = req.queryParams("tags");
             if(title.isEmpty() || entry.isEmpty()) {
                 setFlashMessage(req, "Both TITLE and ENTRY are required fields!");
                 res.redirect("/blogposts/" + blogEntry.getSlug());
@@ -172,6 +175,7 @@ public class Main {
             blogEntry.setPostBody(entry);
             blogEntry.setPostTitle(title);
             blogEntry.setDateCreated(new Date());
+            blogEntry.setTags(stringOfTags);
             res.redirect("/blogposts/" + blogEntry.getSlug());
             return null;
         });
