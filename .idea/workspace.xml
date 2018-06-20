@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cd62190-696b-4099-8754-650ab861065e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/model/BlogEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/model/BlogEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/new.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/new.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/BlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/BlogDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/detail.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/detail.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/new.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/new.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -77,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="177" column="25" lean-forward="true" selection-start-line="177" selection-start-column="25" selection-end-line="177" selection-end-column="25" />
+            <state relative-caret-position="175">
+              <caret line="175" column="60" selection-start-line="175" selection-start-column="60" selection-end-line="175" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlogEntry.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BlogEntry.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="179" column="103" selection-start-line="179" selection-start-column="103" selection-end-line="179" selection-end-column="103" />
+            <state relative-caret-position="-638">
+              <caret line="46" column="76" selection-start-line="46" selection-start-column="76" selection-end-line="46" selection-end-column="76" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1500#1501#0" expanded="true" />
@@ -558,8 +548,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/detail.hbs" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" />
-        <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" />
       </list>
     </option>
   </component>
@@ -815,14 +805,14 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32968536" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.35978112" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35978112" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41723666" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41666666" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32968536" />
       <window_info anchor="right" id="Gradle" order="5" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.5827633" side_tool="true" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" sideWeight="0.5833333" side_tool="true" visible="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="6" />
@@ -1255,20 +1245,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="177" column="25" lean-forward="true" selection-start-line="177" selection-start-column="25" selection-end-line="177" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/BlogEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="179" column="103" selection-start-line="179" selection-start-column="103" selection-end-line="179" selection-end-column="103" />
+        <state relative-caret-position="-638">
+          <caret line="46" column="76" selection-start-line="46" selection-start-column="76" selection-end-line="46" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1500#1501#0" expanded="true" />
@@ -1289,6 +1269,16 @@
             <element signature="e#2751#2752#0" expanded="true" />
             <element signature="e#5144#5145#0" expanded="true" />
             <element signature="e#5206#5207#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="175" column="60" selection-start-line="175" selection-start-column="60" selection-end-line="175" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -30,11 +30,48 @@ public class BlogEntry implements Comparable<BlogEntry> {
         }
     }
 
-    public BlogEntry(String title, String blogBody, String stringOfTags) {
+    public BlogEntry(String title, List<Tag> tags, String blogBody) {
         this.postTitle = title;
         this.postBody = blogBody;
         dateCreated = new Date();
         comments = new ArrayList<>();
+        this.tags = tags;
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BlogEntry(String title, String blogBody, List<Comment> comments, List<Tag> tags) {
+        this.postTitle = title;
+        this.postBody = blogBody;
+        this.tags = tags;
+        dateCreated = new Date();
+        this.comments = comments;
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    private List<Tag> createAndReturnListOfTags(String stringOfTags) {
+//        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
+//        stringTags.forEach(string -> {
+//            Tag tag = new Tag(string);
+//            tags.add(tag);
+//        });
+//        return tags;
+//    }
+
+    public BlogEntry(String title, String blogBody, List<Comment> comments) {
+        this.postTitle = title;
+        this.postBody = blogBody;
+        dateCreated = new Date();
+        this.comments = comments;
         tags = new ArrayList<>();
         try {
             Slugify slugify = new Slugify();
@@ -42,57 +79,6 @@ public class BlogEntry implements Comparable<BlogEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createListOfTags(stringOfTags);
-    }
-
-    public BlogEntry(String title, String blogBody,
-                     String commentAuthor, String commentText, String stringOfTags) {
-        this.postTitle = title;
-        this.postBody = blogBody;
-        this.tags = new ArrayList<>();
-        createListOfTags(stringOfTags);
-        dateCreated = new Date();
-        comments = new ArrayList<>();
-        try {
-            Slugify slugify = new Slugify();
-            slug = slugify.slugify(title);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        comments.add(new Comment(commentAuthor, commentText));
-    }
-
-    private void createListOfTags(String stringOfTags) {
-        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
-        stringTags.forEach(string -> {
-            Tag tag = new Tag(string);
-            tags.add(tag);
-        });
-    }
-
-    private List<Tag> createAndReturnListOfTags(String stringOfTags) {
-        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
-        stringTags.forEach(string -> {
-            Tag tag = new Tag(string);
-            tags.add(tag);
-        });
-        return tags;
-    }
-
-    public BlogEntry(String title, String blogBody,
-                     String commentAuthor, String commentText) {
-        this.postTitle = title;
-        this.postBody = blogBody;
-        dateCreated = new Date();
-        comments = new ArrayList<>();
-        tags = new ArrayList<>();
-        try {
-            Slugify slugify = new Slugify();
-            slug = slugify.slugify(title);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        comments.add(new Comment(commentAuthor, commentText));
     }
 
     public List<Tag> getTags() {
@@ -177,8 +163,7 @@ public class BlogEntry implements Comparable<BlogEntry> {
     public int compareTo(BlogEntry o) {
         return this.getDateCreated().compareTo(o.getDateCreated());
     }
-    // TODO:oi - something is not right with this set method. COmpare it to the createListOfTags method
-    public void setTags(String stringOfTags) {
-        tags = createAndReturnListOfTags(stringOfTags);
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

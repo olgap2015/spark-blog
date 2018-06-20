@@ -141,7 +141,8 @@ public class Main {
                 halt();
             }
             String stringOfTags = req.queryParams("tags");
-            BlogEntry blogEntry = new BlogEntry(title, entry, stringOfTags);
+            List<Tag> tags = createListOfTags(stringOfTags);
+            BlogEntry blogEntry = new BlogEntry(title, tags, entry);
             dao.addEntry(blogEntry);
             res.redirect("/");
             return null;
@@ -172,14 +173,27 @@ public class Main {
                 res.redirect("/blogposts/" + blogEntry.getSlug());
                 halt();
             }
+            List<Tag> tags = createListOfTags(stringOfTags);
             blogEntry.setPostBody(entry);
             blogEntry.setPostTitle(title);
             blogEntry.setDateCreated(new Date());
-            blogEntry.setTags(stringOfTags);
+            blogEntry.setTags(tags);
             res.redirect("/blogposts/" + blogEntry.getSlug());
             return null;
         });
 
+
+
+    }
+
+    private static List<Tag> createListOfTags (String stringOfTags){
+        List<Tag> tags = new ArrayList<>();
+        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
+        stringTags.forEach(string -> {
+            Tag tag = new Tag(string);
+            tags.add(tag);
+        });
+        return tags;
     }
 
     private static void setFlashMessage(Request req, String message) {
