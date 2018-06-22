@@ -15,6 +15,7 @@ public class BlogEntry implements Comparable<BlogEntry> {
     private String slug;
     private List<Comment> comments;
     private List<Tag> tags;
+    private boolean tagsAreEmpty = true;
 
     public BlogEntry(String title, String blogBody) {
         this.postTitle = title;
@@ -30,12 +31,13 @@ public class BlogEntry implements Comparable<BlogEntry> {
         }
     }
 
-    public BlogEntry(String title, List<Tag> tags, String blogBody) {
+    public BlogEntry(String title, String blogBody, List<Tag> tags) {
         this.postTitle = title;
         this.postBody = blogBody;
         dateCreated = new Date();
         comments = new ArrayList<>();
         this.tags = tags;
+        tagsAreEmpty = false;
         try {
             Slugify slugify = new Slugify();
             slug = slugify.slugify(title);
@@ -48,6 +50,7 @@ public class BlogEntry implements Comparable<BlogEntry> {
         this.postTitle = title;
         this.postBody = blogBody;
         this.tags = tags;
+        tagsAreEmpty = false;
         dateCreated = new Date();
         this.comments = comments;
         try {
@@ -58,16 +61,7 @@ public class BlogEntry implements Comparable<BlogEntry> {
         }
     }
 
-//    private List<Tag> createAndReturnListOfTags(String stringOfTags) {
-//        List<String> stringTags = Arrays.asList(stringOfTags.split(","));
-//        stringTags.forEach(string -> {
-//            Tag tag = new Tag(string);
-//            tags.add(tag);
-//        });
-//        return tags;
-//    }
-
-    public BlogEntry(String title, String blogBody, List<Comment> comments) {
+    public BlogEntry(List<Comment> comments, String title, String blogBody) {
         this.postTitle = title;
         this.postBody = blogBody;
         dateCreated = new Date();
@@ -79,6 +73,10 @@ public class BlogEntry implements Comparable<BlogEntry> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean areTagsNotEmpty() {
+        return !tagsAreEmpty;
     }
 
     public List<Tag> getTags() {
@@ -163,7 +161,13 @@ public class BlogEntry implements Comparable<BlogEntry> {
     public int compareTo(BlogEntry o) {
         return this.getDateCreated().compareTo(o.getDateCreated());
     }
+
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+        if (this.tags.isEmpty()) {
+            tagsAreEmpty = true;
+        }
     }
+
+//    public boolean isEmpty
 }

@@ -8,16 +8,17 @@
                     <time datetime="{{ blogEntry.htmlDateTime }}">{{ blogEntry.formattedDate }}</time>
                     <div class="entry">
                         <p>{{ blogEntry.postBody }}</p>
+                        {{#if tagsAreNotEmpty}}
+                            <h3>Tags</h3>
+                            <p>
+                                {{#each blogEntry.tags }}
+                                    <a href="/category/{{ slug }}">{{ tagText }}</a>&nbsp;
+                                {{/each}}
+                            </p>
+                        {{/if}}
                         <p><a class="link" href="/edit/{{ blogEntry.slug }}">Edit Entry</a></p>
                     </div>
                 </article>
-                <h2>Tags</h2>
-                    <p>
-                        {{#each blogEntry.tags }}
-                            <a href="/category/{{ tagText }}"</a>&nbsp;
-                        {{/each}}
-                    </p>
-
             </div>
         </div>
     </section>

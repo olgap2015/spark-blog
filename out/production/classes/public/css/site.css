@@ -103,7 +103,7 @@ h2 {
 	font-size: 28px;
 }
 h3 {
-	font-size: 28px;
+	font-size: 22px;
 }
 p {
 	font-size: 15px;
@@ -218,6 +218,7 @@ a.link {
 	padding: 50px 0;
 	margin-top: 2px;
 }
+
 form label {
 	display: block;
 	font-family: 'Noto Sans', sans-serif;
@@ -261,7 +262,7 @@ form textarea:hover {
 input[type=submit] {
 	margin-right: 5px;
 }
-#flash-message{
+#flash-message {
             background-color: red;
             border-radius: 5px;
             color: #fff;
@@ -269,7 +270,10 @@ input[type=submit] {
             font-size: 18px;
             padding: 10px 20px;
             text-align: center;
-          }
+}
+#delete-entry {
+    margin-top: 15px;
+}
 
 
 

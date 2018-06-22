@@ -78,13 +78,13 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
             model.put("flashMessage", captureFlashMessage(req));
+            model.put("tagsAreNotEmpty", dao.findEntryBySlug(req.params("slug")).areTagsNotEmpty());
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
         // displays a page to add a new blog post
         get("/new", (req, res) -> {
             Map<String, String> model = new HashMap<>();
-//            model.put("password", req.attribute("password"));
             model.put("flashMessage", captureFlashMessage(req));
             return new ModelAndView(model, "new.hbs");
         }, new HandlebarsTemplateEngine());
@@ -95,7 +95,6 @@ public class Main {
 
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", blogEntry);
-//            model.put("password", req.attribute("password"));
             model.put("flashMessage", captureFlashMessage(req));
 
             return new ModelAndView(model, "edit.hbs");
@@ -113,7 +112,6 @@ public class Main {
             Map<String, String> model = new HashMap<>();
             String password = req.queryParams("password");
             res.cookie("password", password);
-//            model.put("password", password);
             model.put("flashMessage", captureFlashMessage(req));
             if (!password.toLowerCase().equals(PASSWORD)) {
                 setFlashMessage(req, "Wrong password! Please try again!");
@@ -142,7 +140,7 @@ public class Main {
             }
             String stringOfTags = req.queryParams("tags");
             List<Tag> tags = createListOfTags(stringOfTags);
-            BlogEntry blogEntry = new BlogEntry(title, tags, entry);
+            BlogEntry blogEntry = new BlogEntry(title, entry, tags);
             dao.addEntry(blogEntry);
             res.redirect("/");
             return null;
@@ -179,6 +177,13 @@ public class Main {
             blogEntry.setDateCreated(new Date());
             blogEntry.setTags(tags);
             res.redirect("/blogposts/" + blogEntry.getSlug());
+            return null;
+        });
+
+        post("delete/:slug", (req, res) -> {
+            BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
+            dao.deleteEntry(blogEntry);
+            res.redirect("/");
             return null;
         });
 

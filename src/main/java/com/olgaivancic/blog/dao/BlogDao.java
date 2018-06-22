@@ -10,5 +10,6 @@ public interface BlogDao {
     List<BlogEntry> findAllEntries();
     BlogEntry findEntryBySlug(String slug);
     List<BlogEntry> findEntriesByTagSlug(Tag tag);
+    boolean deleteEntry(BlogEntry blogEntry);
 
 }
