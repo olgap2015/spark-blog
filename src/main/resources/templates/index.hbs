@@ -6,11 +6,12 @@
                 {{#each blogEntries}}
                     <article>
                         <h2><a href="/blogposts/{{ slug }}">{{ PostTitle }}</a></h2>
-                        <!-- TODO:oi - figure out how to mention the date in datetime attribute -->
                         <time datetime="{{ htmlDateTime }}">{{ formattedDate }}</time>
                     </article>
                 {{/each}}
             </div>
 {{/partial}}
+
+{{#partial "title"}}Home Page"{{/partial}}
 
 {{> base.hbs}}

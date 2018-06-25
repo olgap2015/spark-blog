@@ -8,7 +8,6 @@ public class Comment {
     private String commentAuthor;
     private String commentBody;
     private Date dateCreated;
-    // TODO:oi - add toString() method after creating Date field
 
     public Comment(String commentAuthor, String commentBody) {
         this.commentAuthor = commentAuthor;

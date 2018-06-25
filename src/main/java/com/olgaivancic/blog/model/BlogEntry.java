@@ -169,5 +169,10 @@ public class BlogEntry implements Comparable<BlogEntry> {
         }
     }
 
-//    public boolean isEmpty
+    @Override
+    public String toString() {
+        return "BlogEntry: postTitle=\""
+                + postTitle + "\", dateCreated=\"" +
+                this.getFormattedDate() + "\"";
+    }
 }

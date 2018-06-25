@@ -96,7 +96,8 @@ h3 {
 	line-height: 1.2em;
 }
 h1 {
-	font-size: 44px;
+    text-align: center;
+	font-size: 40px;
 	margin-bottom: 12px;
 }
 h2 {
@@ -140,26 +141,33 @@ a.link {
 .password h2 {
 	margin-bottom: 35px;
 }
+
 .entry-list article {
 	margin-bottom: 70px;
 	text-align: center;
 }
+
 .entry-list article:last-child {
 	margin-bottom: 5px;
 }
+
 .entry-list article h2 {
 	margin-bottom: 8px;
 }
+
 .entry-list article a {
 	text-decoration: none;
 	color: #000;
 }
+
 .entry-list time {
 	color: #888;
 }
+
 .entry-list.single {
 	padding-bottom: 30px;
 }
+.by-category-list,
 .entry-list.single time {
 	font-size: 18px;
 }

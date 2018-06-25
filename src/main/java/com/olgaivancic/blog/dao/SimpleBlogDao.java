@@ -56,13 +56,17 @@ public class SimpleBlogDao implements BlogDao {
                 .orElseThrow(NotFoundException::new);
     }
 
+
+    // TODO:oi - it seems like this method is not working, it returns List containing 0 elements.
     @Override
-    public List<BlogEntry> findEntriesByTagSlug(Tag tag) {
+    public List<BlogEntry> findEntriesByTagSlug(String tagSlug) {
         List<BlogEntry> blogEntriesByTag = new ArrayList<>();
         blogEntries.forEach(entry -> {
-            if (entry.getTags().contains(tag)) {
-                blogEntriesByTag.add(entry);
-            }
+            entry.getTags().forEach(tag -> {
+                if (tag.getSlug().contains(tagSlug)) {
+                    blogEntriesByTag.add(entry);
+                }
+            });
         });
         return blogEntriesByTag;
     }

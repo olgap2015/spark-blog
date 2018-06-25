@@ -9,7 +9,7 @@ public interface BlogDao {
     boolean addEntry(BlogEntry blogEntry);
     List<BlogEntry> findAllEntries();
     BlogEntry findEntryBySlug(String slug);
-    List<BlogEntry> findEntriesByTagSlug(Tag tag);
+    List<BlogEntry> findEntriesByTagSlug(String tagSlug);
     boolean deleteEntry(BlogEntry blogEntry);
 
 }

@@ -1,0 +1,15 @@
+{{#partial "content"}}
+    <h1>Blog Posts Tagged with "{{ tag.tagText }}":</h1>
+    <div class="entry-list">
+        {{#each blogEntries}}
+            <article>
+                <h2><a href="/blogposts/{{ slug }}">{{ PostTitle }}</a></h2>
+                <time datetime="{{ htmlDateTime }}">{{ formattedDate }}</time>
+            </article>
+        {{/each}}
+    </div>
+{{/partial}}
+
+{{#partial "title"}}Category - "{{ tag.tagText }}"{{/partial}}
+
+{{> base.hbs}}

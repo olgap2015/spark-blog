@@ -36,7 +36,6 @@ public class Main {
         });
 
         // before giving access to edit page, make sure that the user is admin
-        // TODO:oi - fix the path here, add the slug
         before("/edit/*", (req, res) -> {
 //            String slug = req.params("slug");
 //
@@ -63,6 +62,7 @@ public class Main {
         });
 
         // displays the Home (index) page with all the blog entries and an edit button
+        // new posts get displayed first.
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<BlogEntry> blogEntries = dao.findAllEntries();
@@ -80,6 +80,17 @@ public class Main {
             model.put("flashMessage", captureFlashMessage(req));
             model.put("tagsAreNotEmpty", dao.findEntryBySlug(req.params("slug")).areTagsNotEmpty());
             return new ModelAndView(model, "detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        // displays a list of posts with a certain tag
+        get("/category/:slug", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String slug = req.params("slug");
+            List<BlogEntry> blogEntries = dao.findEntriesByTagSlug(slug);
+            model.put("blogEntries", blogEntries);
+            Tag tag = blogEntries.get(0).findTagBySlug(slug);
+            model.put("tag", tag);
+            return new ModelAndView(model, "category.hbs");
         }, new HandlebarsTemplateEngine());
 
         // displays a page to add a new blog post
