@@ -167,10 +167,13 @@ public class Main {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
             String author = req.queryParams("name").trim();
             String commentText = req.queryParams("comment").trim();
-            if(commentText.isEmpty() || author.isEmpty()) {
-                setFlashMessage(req, "Both NAME and COMMENT are required fields!");
+            if(commentText.isEmpty()) {
+                setFlashMessage(req, "COMMENT field can't be empty!");
                 res.redirect("/blogposts/" + blogEntry.getSlug());
                 halt();
+            }
+            if (author.isEmpty()) {
+                author = "Anonimous Author";
             }
             Comment comment = new Comment(author, commentText);
             blogEntry.addComment(comment);

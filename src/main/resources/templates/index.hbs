@@ -7,6 +7,11 @@
                     <article>
                         <h2><a href="/blogposts/{{ slug }}">{{ PostTitle }}</a></h2>
                         <time datetime="{{ htmlDateTime }}">{{ formattedDate }}</time>
+                        <p>
+                            {{#each tags }}
+                                <a href="/category/{{ slug }}">{{ tagText }}</a>&nbsp;
+                            {{/each}}
+                        </p>
                     </article>
                 {{/each}}
             </div>
