@@ -297,7 +297,7 @@ input[type=submit] {
 	margin-right: 5px;
 }
 #flash-message {
-            background-color: red;
+            background-color: #0d7315;
             border-radius: 5px;
             color: #fff;
             display: block;
