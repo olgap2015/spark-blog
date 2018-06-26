@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cd62190-696b-4099-8754-650ab861065e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/dao/BlogDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/dao/BlogDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/dao/SimpleBlogDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/dao/SimpleBlogDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/model/Tag.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/olgaivancic/blog/model/Tag.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/public/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/public/css/site.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/templates/base.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/templates/base.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/BlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/BlogDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/model/Tag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/css/site.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/base.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/base.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/category.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/category.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -45,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="site.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="site.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/public/css/site.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
+            <state relative-caret-position="3080">
+              <caret line="140" column="19" lean-forward="true" selection-start-line="140" selection-start-column="19" selection-end-line="140" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -90,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="293">
@@ -548,10 +533,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.hbs" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/category.hbs" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/base.hbs" />
-        <option value="$PROJECT_DIR$/src/main/resources/public/css/site.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/dao/SimpleBlogDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/edit.hbs" />
         <option value="$PROJECT_DIR$/src/main/java/com/olgaivancic/blog/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/public/css/site.css" />
       </list>
     </option>
   </component>
@@ -1149,13 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/public/css/site.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="140" column="17" selection-start-line="140" selection-start-column="17" selection-end-line="140" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/Collection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
@@ -1230,6 +1208,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/public/css/site.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3080">
+          <caret line="140" column="19" lean-forward="true" selection-start-line="140" selection-start-column="19" selection-end-line="140" selection-end-column="19" />
         </state>
       </provider>
     </entry>
