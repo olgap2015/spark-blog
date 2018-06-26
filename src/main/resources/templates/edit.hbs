@@ -10,7 +10,7 @@
             <label for="entry">Entry</label>
             <textarea rows="5" name="entry">{{ blogEntry.postBody }}</textarea>
             <label for="tags">Tags (comma separated)</label>
-            <input type="text" name="tags" value="{{#each blogEntry.tags}}{{ tagText }}&#44;&nbsp;{{/each}}">
+            <input type="text" name="tags" value="{{#each blogEntry.tags}}{{ tagText }}&#44{{/each}}">
             <input type="submit" value="Save Entry" class="button">
             <a href="/blogposts/{{ blogEntry.slug }}" class="button button-secondary">Cancel</a>
         </form>

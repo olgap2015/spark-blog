@@ -19,6 +19,18 @@
             </div>
         </div>
     </header>
+    <div class="container">
+        <nav>
+            <h3>Posts by category</h3>
+            <ul>
+                {{#each tags}}
+                    <li>
+                        <a href="/category/{{ slug }}">{{ tagText }}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </nav>
+    </div>
     <section>
         <div class="container">
 {{/block}}

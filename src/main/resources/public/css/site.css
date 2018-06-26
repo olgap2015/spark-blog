@@ -10,10 +10,24 @@ body {
 	font-family: 'Noto Serif', Georgia, serif;
 	background: #444;
 }
+
 .container {
 	margin: 0 auto;
 	padding: 0 25px;
 	background: #FFF;
+}
+
+nav {
+    float: left;
+    display: block;
+    height:100%
+    width: fit-content;
+    margin: 90px 0 0 0;
+}
+
+nav a {
+    text-decoration: none;
+    display: block
 }
 header .site-header {
 	border-bottom: 1px solid #d1d1d1;
@@ -97,8 +111,8 @@ h3 {
 }
 h1 {
     text-align: center;
-	font-size: 40px;
-	margin-bottom: 12px;
+	font-size: 35px;
+	margin-bottom: 50px;
 }
 h2 {
 	font-size: 28px;
@@ -113,6 +127,18 @@ p {
 p a {
 	border-bottom: 2px solid #c1c1c1;
 	padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+li a {
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 20px;
+    color: black;
 }
 a.link {
 	font-weight: bold;

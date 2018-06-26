@@ -27,12 +27,6 @@ public class Main {
             if (req.cookie("password") != null) {
                 req.attribute("password", req.cookie("password"));
             }
-//            if (req.cookie("previousPage") != null) {
-//                req.attribute("previousPage", req.cookie("previousPage"));
-//            }
-//            if (req.cookie("slug") != null) {
-//                req.attribute("slug", req.cookie("slug"));
-//            }
         });
 
         // before giving access to edit page, make sure that the user is admin
@@ -70,6 +64,8 @@ public class Main {
             Collections.reverse(blogEntries);
             model.put("blogEntries", blogEntries);
             model.put("flashMessage", captureFlashMessage(req));
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -79,6 +75,8 @@ public class Main {
             model.put("blogEntry", dao.findEntryBySlug(req.params("slug")));
             model.put("flashMessage", captureFlashMessage(req));
             model.put("tagsAreNotEmpty", dao.findEntryBySlug(req.params("slug")).areTagsNotEmpty());
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
             return new ModelAndView(model, "detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -90,13 +88,17 @@ public class Main {
             model.put("blogEntries", blogEntries);
             Tag tag = blogEntries.get(0).findTagBySlug(slug);
             model.put("tag", tag);
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
             return new ModelAndView(model, "category.hbs");
         }, new HandlebarsTemplateEngine());
 
         // displays a page to add a new blog post
         get("/new", (req, res) -> {
-            Map<String, String> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("flashMessage", captureFlashMessage(req));
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
             return new ModelAndView(model, "new.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -107,6 +109,8 @@ public class Main {
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntry", blogEntry);
             model.put("flashMessage", captureFlashMessage(req));
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
 
             return new ModelAndView(model, "edit.hbs");
         }, new HandlebarsTemplateEngine());
@@ -114,8 +118,10 @@ public class Main {
         // displays a page where user can enter the password.
         // Access is denied if the password entered is not "admin"
         get("/password", (req, res) -> {
-            Map<String, String> model = new HashMap<>();
+            Map<String, Object> model = new HashMap<>();
             model.put("flashMessage", captureFlashMessage(req));
+            Set<Tag> setOfTags = dao.findAllTags();
+            model.put("tags", setOfTags);
             return new ModelAndView(model, "password.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -142,14 +148,14 @@ public class Main {
         });
 
         post("publish-new-entry", (req, res) -> {
-            String title = req.queryParams("title");
-            String entry = req.queryParams("entry");
+            String title = req.queryParams("title").trim();
+            String entry = req.queryParams("entry").trim();
             if(title.isEmpty() || entry.isEmpty()) {
                 setFlashMessage(req, "Both TITLE and ENTRY are required fields!");
                 res.redirect("/new");
                 halt();
             }
-            String stringOfTags = req.queryParams("tags");
+            String stringOfTags = req.queryParams("tags").toLowerCase();
             List<Tag> tags = createListOfTags(stringOfTags);
             BlogEntry blogEntry = new BlogEntry(title, entry, tags);
             dao.addEntry(blogEntry);
@@ -159,8 +165,8 @@ public class Main {
 
         post("/blogposts/:slug/publish-comment", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
-            String author = req.queryParams("name");
-            String commentText = req.queryParams("comment");
+            String author = req.queryParams("name").trim();
+            String commentText = req.queryParams("comment").trim();
             if(commentText.isEmpty() || author.isEmpty()) {
                 setFlashMessage(req, "Both NAME and COMMENT are required fields!");
                 res.redirect("/blogposts/" + blogEntry.getSlug());
@@ -174,9 +180,9 @@ public class Main {
 
         post("/edit/:slug", (req, res) -> {
             BlogEntry blogEntry = dao.findEntryBySlug(req.params("slug"));
-            String title = req.queryParams("title");
-            String entry = req.queryParams("entry");
-            String stringOfTags = req.queryParams("tags");
+            String title = req.queryParams("title").trim();
+            String entry = req.queryParams("entry").trim();
+            String stringOfTags = req.queryParams("tags").toLowerCase();
             if(title.isEmpty() || entry.isEmpty()) {
                 setFlashMessage(req, "Both TITLE and ENTRY are required fields!");
                 res.redirect("/blogposts/" + blogEntry.getSlug());
@@ -206,8 +212,12 @@ public class Main {
         List<Tag> tags = new ArrayList<>();
         List<String> stringTags = Arrays.asList(stringOfTags.split(","));
         stringTags.forEach(string -> {
-            Tag tag = new Tag(string);
-            tags.add(tag);
+            String trimmedString = string.trim();
+            if (!trimmedString.isEmpty()) {
+                Tag tag = new Tag(trimmedString);
+                tags.add(tag);
+
+            }
         });
         return tags;
     }

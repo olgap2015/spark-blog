@@ -4,8 +4,7 @@ import com.olgaivancic.blog.model.BlogEntry;
 import com.olgaivancic.blog.model.Comment;
 import com.olgaivancic.blog.model.Tag;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SimpleBlogDao implements BlogDao {
     private final ArrayList<BlogEntry> blogEntries;
@@ -46,6 +45,13 @@ public class SimpleBlogDao implements BlogDao {
     @Override
     public List<BlogEntry> findAllEntries() {
         return new ArrayList<>(blogEntries);
+    }
+
+    @Override
+    public Set<Tag> findAllTags() {
+        Set<Tag> tags = new TreeSet<>();
+        blogEntries.forEach(entry -> tags.addAll(entry.getTags()));
+        return tags;
     }
 
     @Override
